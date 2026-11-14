@@ -7,7 +7,7 @@ import random
 from medmnist import PathMNIST
 from utils.dataset_utils import check, separate_data, split_data, save_file
 
-# Here  we have fixed the seed for a each client so that they get same data in each round this is neceassry as due to this each client seed same data throughout.
+#  Fixed seeds: the same client split is produced every time, so FedAvg and FedProx see identical data
 random.seed(1)
 np.random.seed(1)
 num_clients = 5            # 5 simulated hospitals
