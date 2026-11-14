@@ -6,7 +6,7 @@ import os
 from torch.utils.data import DataLoader
 from sklearn.preprocessing import label_binarize
 from sklearn import metrics
-from utils.data_utils import read_client_data
+from utils.data_utils import read_client_data, add_label_noise  # CHANGE
 
 
 class Client(object):
@@ -15,7 +15,7 @@ class Client(object):
     """
 
     def __init__(self, args, id, train_samples, test_samples, **kwargs):
-        torch.manual_seed(0)
+        torch.manual_seed(args.seed)  # CHANGE
         self.model = copy.deepcopy(args.model)
         self.algorithm = args.algorithm
         self.dataset = args.dataset
@@ -30,6 +30,10 @@ class Client(object):
         self.learning_rate = args.local_learning_rate
         self.local_epochs = args.local_epochs
         self.few_shot = args.few_shot
+        self.noisy_id = args.noisy_id  # CHANGE
+        self.noise_rate = args.noise_rate
+        self.noise_seed = 1000 + args.seed
+        self.noise_shown = False
 
         # check BatchNorm
         self.has_BatchNorm = False
@@ -56,6 +60,12 @@ class Client(object):
         if batch_size == None:
             batch_size = self.batch_size
         train_data = read_client_data(self.dataset, self.id, is_train=True, few_shot=self.few_shot)
+        if self.id == self.noisy_id and self.noise_rate > 0:  # CHANGE
+            train_data, frac = add_label_noise(train_data, self.noise_rate,
+                                               self.noise_seed, self.num_classes)
+            if not self.noise_shown:
+                print(f"Client {self.id}: noisy fraction = {frac:.4f}")
+                self.noise_shown = True
         return DataLoader(train_data, batch_size, drop_last=True, shuffle=True)
 
     def load_test_data(self, batch_size=None):

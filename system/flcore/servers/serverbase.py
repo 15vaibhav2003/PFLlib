@@ -5,6 +5,9 @@ import h5py
 import copy
 import time
 import random
+import csv  # CHANGE
+import torch.nn.functional as F
+import wandb
 from utils.data_utils import read_client_data
 from utils.dlg import DLG
 
@@ -62,6 +65,37 @@ class Server(object):
         self.new_clients = []
         self.eval_new_clients = False
         self.fine_tuning_epoch_new = args.fine_tuning_epoch_new
+
+    def log_row(self, row, kind):  # CHANGE
+        if wandb.run is not None:
+            wandb.log(row, step=row["round"])
+        os.makedirs("logs", exist_ok=True)
+        path = f"logs/{self.args.run_name}_{kind}.csv"
+        new_file = not os.path.exists(path)
+        with open(path, "a", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=list(row.keys()))
+            if new_file:
+                w.writeheader()
+            w.writerow(row)
+
+    def update_stats(self, rnd):  # CHANGE
+        g = torch.cat([p.data.view(-1) for p in self.global_model.parameters()])
+        deltas = []
+        for m in self.uploaded_models:
+            w = torch.cat([p.data.view(-1) for p in m.parameters()])
+            deltas.append(w - g)
+        agg = torch.zeros_like(g)
+        for wt, d in zip(self.uploaded_weights, deltas):
+            agg += wt * d
+        row = {"round": rnd, "global/update_norm": agg.norm().item()}
+        items = sorted(zip(self.uploaded_ids, self.uploaded_weights, deltas), key=lambda t: t[0])
+        for cid, wt, d in items:
+            row[f"client_{cid}/update_norm"] = d.norm().item()
+            row[f"client_{cid}/cosine"] = F.cosine_similarity(d, agg, dim=0).item()
+            if wt < 1.0:
+                rest = (agg - wt * d) / (1.0 - wt)
+                row[f"client_{cid}/cosine_loo"] = F.cosine_similarity(d, rest, dim=0).item()
+        self.log_row(row, "stats")
 
     def set_clients(self, clientObj):
         for i, train_slow, send_slow in zip(range(self.num_clients), self.train_slow_clients, self.send_slow_clients):
@@ -251,6 +285,16 @@ class Server(object):
         # self.print_(test_acc, train_acc, train_loss)
         print("Std Test Accuracy: {:.4f}".format(np.std(accs)))
         print("Std Test AUC: {:.4f}".format(np.std(aucs)))
+
+        row = {"round": len(self.rs_test_acc) - 1,  # CHANGE
+               "global/test_acc": test_acc,
+               "global/train_loss": train_loss,
+               "global/test_acc_std": float(np.std(accs))}
+        for cid, a in zip(stats[0], accs):
+            row[f"client_{cid}/test_acc"] = a
+        for cid, l, n in zip(stats_train[0], stats_train[2], stats_train[1]):
+            row[f"client_{cid}/train_loss"] = l / n
+        self.log_row(row, "eval")
 
     def print_(self, test_acc, test_auc, train_loss):
         print("Average Test Accuracy: {:.4f}".format(test_acc))

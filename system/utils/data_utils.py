@@ -56,3 +56,22 @@ def process_Shakespeare(data):
     y = torch.Tensor(data['y']).type(torch.int64)
     return [(x, y) for x, y in zip(X, y)]
 
+
+
+def add_label_noise(data, rate, seed, ncls):  # CHANGE
+    rng = np.random.default_rng(seed)
+    n = len(data)
+    k = int(round(rate * n))
+    idx = rng.choice(n, size=k, replace=False)
+    new = list(data)
+    for i in idx:
+        x, y = new[i]
+        old = int(y)
+        off = int(rng.integers(1, ncls))
+        nl = (old + off) % ncls
+        new[i] = (x, torch.tensor(nl, dtype=torch.int64))
+    flipped = 0
+    for (a, b), (c, d) in zip(data, new):
+        if int(b) != int(d):
+            flipped += 1
+    return new, flipped / n

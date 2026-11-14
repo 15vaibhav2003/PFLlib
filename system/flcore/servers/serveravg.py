@@ -41,6 +41,7 @@ class FedAvg(Server):
             self.receive_models()
             if self.dlg_eval and i%self.dlg_gap == 0:
                 self.call_dlg(i)
+            self.update_stats(i)  # CHANGE
             self.aggregate_parameters()
 
             self.Budget.append(time.time() - s_t)
