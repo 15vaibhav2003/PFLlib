@@ -1,0 +1,673 @@
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from WANDB_API_KEY.
+wandb: Currently logged in as: vaibhavsharma15 (vaibhavsharma15-iiit-allahabad) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: Using an existing wandb-core service via WANDB_SERVICE.
+wandb: setting up run oqv9hxy3
+wandb: Tracking run with wandb version 0.28.1
+wandb: Run data is saved locally in /kaggle/working/PFLlib/system/wandb/run-20261114_131121-oqv9hxy3
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run fedprox_mu0.01_seed0
+wandb: ⭐️ View project at https://wandb.ai/vaibhavsharma15-iiit-allahabad/fl-pathmnist-screening
+wandb: 🚀 View run at https://wandb.ai/vaibhavsharma15-iiit-allahabad/fl-pathmnist-screening/runs/oqv9hxy3
+==================================================
+goal = fedprox_mu0.01_seed0
+device = cuda
+device_id = 1
+dataset = PathMNIST
+num_classes = 9
+model = CNN
+batch_size = 64
+local_learning_rate = 0.01
+learning_rate_decay = False
+learning_rate_decay_gamma = 0.99
+global_rounds = 50
+top_cnt = 100
+local_epochs = 1
+algorithm = FedProx
+join_ratio = 1.0
+random_join_ratio = False
+num_clients = 5
+prev = 0
+times = 1
+eval_gap = 1
+save_folder_name = items
+auto_break = False
+dlg_eval = False
+dlg_gap = 100
+batch_num_per_client = 2
+num_new_clients = 0
+fine_tuning_epoch_new = 0
+feature_dim = 512
+vocab_size = 80
+max_len = 200
+few_shot = 0
+client_drop_rate = 0.0
+train_slow_rate = 0.0
+send_slow_rate = 0.0
+time_select = False
+time_threthold = 10000
+beta = 0.0
+lamda = 1.0
+mu = 0.01
+K = 5
+p_learning_rate = 0.01
+M = 5
+itk = 4000
+alphaK = 1.0
+sigma = 1.0
+alpha = 1.0
+plocal_epochs = 1
+tau = 1.0
+fine_tuning_epochs = 10
+dr_learning_rate = 0.0
+L = 1.0
+noise_dim = 512
+generator_learning_rate = 0.005
+hidden_dim = 512
+server_epochs = 1000
+localize_feature_extractor = False
+server_learning_rate = 1.0
+eta = 1.0
+rand_percent = 80
+layer_idx = 2
+mentee_learning_rate = 0.005
+T_start = 0.95
+T_end = 0.98
+momentum = 0.1
+kl_weight = 0.0
+first_stage_bound = 0
+fedcross_alpha = 0.99
+collaberative_model_select_strategy = 1
+seed = 0
+noisy_id = 4
+noise_rate = 0.4
+wandb_project = fl-pathmnist-screening
+run_name = fedprox_mu0.01_seed0
+==================================================
+
+============= Running time: 0th =============
+Creating server and clients ...
+FedAvgCNN(
+  (conv1): Sequential(
+    (0): Conv2d(3, 32, kernel_size=(5, 5), stride=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), padding=0, dilation=1, ceil_mode=False)
+  )
+  (conv2): Sequential(
+    (0): Conv2d(32, 64, kernel_size=(5, 5), stride=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc1): Sequential(
+    (0): Linear(in_features=1024, out_features=512, bias=True)
+    (1): ReLU(inplace=True)
+  )
+  (fc): Linear(in_features=512, out_features=9, bias=True)
+)
+
+Join ratio / total clients: 1.0 / 5
+Finished creating server and clients.
+
+-------------Round number: 0-------------
+
+Evaluate global model
+Client 4: noisy fraction = 0.4000
+Averaged Train Loss: 2.1987
+Averaged Test Accuracy: 0.1524
+Averaged Test AUC: 0.4702
+Std Test Accuracy: 0.1483
+Std Test AUC: 0.1784
+------------------------- time cost ------------------------- 18.815447568893433
+
+-------------Round number: 1-------------
+
+Evaluate global model
+Averaged Train Loss: 2.0561
+Averaged Test Accuracy: 0.2225
+Averaged Test AUC: 0.6603
+Std Test Accuracy: 0.1404
+Std Test AUC: 0.2442
+------------------------- time cost ------------------------- 18.373987674713135
+
+-------------Round number: 2-------------
+
+Evaluate global model
+Averaged Train Loss: 1.8629
+Averaged Test Accuracy: 0.3125
+Averaged Test AUC: 0.7252
+Std Test Accuracy: 0.1238
+Std Test AUC: 0.2247
+------------------------- time cost ------------------------- 18.111934185028076
+
+-------------Round number: 3-------------
+
+Evaluate global model
+Averaged Train Loss: 1.7271
+Averaged Test Accuracy: 0.3383
+Averaged Test AUC: 0.7558
+Std Test Accuracy: 0.1319
+Std Test AUC: 0.2260
+------------------------- time cost ------------------------- 18.03617215156555
+
+-------------Round number: 4-------------
+
+Evaluate global model
+Averaged Train Loss: 1.6405
+Averaged Test Accuracy: 0.3775
+Averaged Test AUC: 0.7782
+Std Test Accuracy: 0.1563
+Std Test AUC: 0.2212
+------------------------- time cost ------------------------- 18.310545921325684
+
+-------------Round number: 5-------------
+
+Evaluate global model
+Averaged Train Loss: 1.5895
+Averaged Test Accuracy: 0.4105
+Averaged Test AUC: 0.7916
+Std Test Accuracy: 0.1677
+Std Test AUC: 0.2072
+------------------------- time cost ------------------------- 18.37203621864319
+
+-------------Round number: 6-------------
+
+Evaluate global model
+Averaged Train Loss: 1.5645
+Averaged Test Accuracy: 0.4106
+Averaged Test AUC: 0.8012
+Std Test Accuracy: 0.1619
+Std Test AUC: 0.1887
+------------------------- time cost ------------------------- 18.259718894958496
+
+-------------Round number: 7-------------
+
+Evaluate global model
+Averaged Train Loss: 1.5085
+Averaged Test Accuracy: 0.4389
+Averaged Test AUC: 0.8250
+Std Test Accuracy: 0.1756
+Std Test AUC: 0.1511
+------------------------- time cost ------------------------- 18.161006450653076
+
+-------------Round number: 8-------------
+
+Evaluate global model
+Averaged Train Loss: 1.5038
+Averaged Test Accuracy: 0.4396
+Averaged Test AUC: 0.8220
+Std Test Accuracy: 0.1779
+Std Test AUC: 0.1438
+------------------------- time cost ------------------------- 18.07503581047058
+
+-------------Round number: 9-------------
+
+Evaluate global model
+Averaged Train Loss: 1.4640
+Averaged Test Accuracy: 0.4595
+Averaged Test AUC: 0.8341
+Std Test Accuracy: 0.1827
+Std Test AUC: 0.1275
+------------------------- time cost ------------------------- 18.3472740650177
+
+-------------Round number: 10-------------
+
+Evaluate global model
+Averaged Train Loss: 1.4436
+Averaged Test Accuracy: 0.4688
+Averaged Test AUC: 0.8432
+Std Test Accuracy: 0.1908
+Std Test AUC: 0.1148
+------------------------- time cost ------------------------- 18.574151277542114
+
+-------------Round number: 11-------------
+
+Evaluate global model
+Averaged Train Loss: 1.4325
+Averaged Test Accuracy: 0.4618
+Averaged Test AUC: 0.8447
+Std Test Accuracy: 0.1834
+Std Test AUC: 0.1146
+------------------------- time cost ------------------------- 18.47607731819153
+
+-------------Round number: 12-------------
+
+Evaluate global model
+Averaged Train Loss: 1.4258
+Averaged Test Accuracy: 0.4676
+Averaged Test AUC: 0.8451
+Std Test Accuracy: 0.1901
+Std Test AUC: 0.1146
+------------------------- time cost ------------------------- 18.587197303771973
+
+-------------Round number: 13-------------
+
+Evaluate global model
+Averaged Train Loss: 1.4118
+Averaged Test Accuracy: 0.4684
+Averaged Test AUC: 0.8514
+Std Test Accuracy: 0.1903
+Std Test AUC: 0.1111
+------------------------- time cost ------------------------- 18.3486008644104
+
+-------------Round number: 14-------------
+
+Evaluate global model
+Averaged Train Loss: 1.3947
+Averaged Test Accuracy: 0.4792
+Averaged Test AUC: 0.8516
+Std Test Accuracy: 0.1995
+Std Test AUC: 0.1090
+------------------------- time cost ------------------------- 18.69947576522827
+
+-------------Round number: 15-------------
+
+Evaluate global model
+Averaged Train Loss: 1.3652
+Averaged Test Accuracy: 0.4891
+Averaged Test AUC: 0.8614
+Std Test Accuracy: 0.1967
+Std Test AUC: 0.0853
+------------------------- time cost ------------------------- 18.752023220062256
+
+-------------Round number: 16-------------
+
+Evaluate global model
+Averaged Train Loss: 1.3709
+Averaged Test Accuracy: 0.4836
+Averaged Test AUC: 0.8629
+Std Test Accuracy: 0.1960
+Std Test AUC: 0.0849
+------------------------- time cost ------------------------- 19.04623031616211
+
+-------------Round number: 17-------------
+
+Evaluate global model
+Averaged Train Loss: 1.3271
+Averaged Test Accuracy: 0.5010
+Averaged Test AUC: 0.8705
+Std Test Accuracy: 0.2001
+Std Test AUC: 0.0732
+------------------------- time cost ------------------------- 19.14029836654663
+
+-------------Round number: 18-------------
+
+Evaluate global model
+Averaged Train Loss: 1.3308
+Averaged Test Accuracy: 0.4919
+Averaged Test AUC: 0.8725
+Std Test Accuracy: 0.1981
+Std Test AUC: 0.0713
+------------------------- time cost ------------------------- 19.660372257232666
+
+-------------Round number: 19-------------
+
+Evaluate global model
+Averaged Train Loss: 1.2968
+Averaged Test Accuracy: 0.5089
+Averaged Test AUC: 0.8749
+Std Test Accuracy: 0.1920
+Std Test AUC: 0.0672
+------------------------- time cost ------------------------- 19.011133909225464
+
+-------------Round number: 20-------------
+
+Evaluate global model
+Averaged Train Loss: 1.2986
+Averaged Test Accuracy: 0.5079
+Averaged Test AUC: 0.8770
+Std Test Accuracy: 0.2062
+Std Test AUC: 0.0676
+------------------------- time cost ------------------------- 19.25760293006897
+
+-------------Round number: 21-------------
+
+Evaluate global model
+Averaged Train Loss: 1.3104
+Averaged Test Accuracy: 0.5083
+Averaged Test AUC: 0.8777
+Std Test Accuracy: 0.2054
+Std Test AUC: 0.0656
+------------------------- time cost ------------------------- 18.831684827804565
+
+-------------Round number: 22-------------
+
+Evaluate global model
+Averaged Train Loss: 1.2592
+Averaged Test Accuracy: 0.5288
+Averaged Test AUC: 0.8835
+Std Test Accuracy: 0.2072
+Std Test AUC: 0.0612
+------------------------- time cost ------------------------- 19.710169315338135
+
+-------------Round number: 23-------------
+
+Evaluate global model
+Averaged Train Loss: 1.2617
+Averaged Test Accuracy: 0.5373
+Averaged Test AUC: 0.8830
+Std Test Accuracy: 0.2154
+Std Test AUC: 0.0630
+------------------------- time cost ------------------------- 19.048794746398926
+
+-------------Round number: 24-------------
+
+Evaluate global model
+Averaged Train Loss: 1.2521
+Averaged Test Accuracy: 0.5236
+Averaged Test AUC: 0.8864
+Std Test Accuracy: 0.2180
+Std Test AUC: 0.0604
+------------------------- time cost ------------------------- 18.820253372192383
+
+-------------Round number: 25-------------
+
+Evaluate global model
+Averaged Train Loss: 1.2366
+Averaged Test Accuracy: 0.5487
+Averaged Test AUC: 0.8863
+Std Test Accuracy: 0.2152
+Std Test AUC: 0.0619
+------------------------- time cost ------------------------- 18.413238525390625
+
+-------------Round number: 26-------------
+
+Evaluate global model
+Averaged Train Loss: 1.2591
+Averaged Test Accuracy: 0.5363
+Averaged Test AUC: 0.8899
+Std Test Accuracy: 0.1773
+Std Test AUC: 0.0433
+------------------------- time cost ------------------------- 18.57763648033142
+
+-------------Round number: 27-------------
+
+Evaluate global model
+Averaged Train Loss: 1.2323
+Averaged Test Accuracy: 0.5530
+Averaged Test AUC: 0.8922
+Std Test Accuracy: 0.1811
+Std Test AUC: 0.0425
+------------------------- time cost ------------------------- 18.61955499649048
+
+-------------Round number: 28-------------
+
+Evaluate global model
+Averaged Train Loss: 1.2339
+Averaged Test Accuracy: 0.5472
+Averaged Test AUC: 0.8931
+Std Test Accuracy: 0.1897
+Std Test AUC: 0.0398
+------------------------- time cost ------------------------- 18.301522493362427
+
+-------------Round number: 29-------------
+
+Evaluate global model
+Averaged Train Loss: 1.2029
+Averaged Test Accuracy: 0.5681
+Averaged Test AUC: 0.8965
+Std Test Accuracy: 0.1868
+Std Test AUC: 0.0387
+------------------------- time cost ------------------------- 18.572812795639038
+
+-------------Round number: 30-------------
+
+Evaluate global model
+Averaged Train Loss: 1.1971
+Averaged Test Accuracy: 0.5726
+Averaged Test AUC: 0.8960
+Std Test Accuracy: 0.1743
+Std Test AUC: 0.0389
+------------------------- time cost ------------------------- 18.393819332122803
+
+-------------Round number: 31-------------
+
+Evaluate global model
+Averaged Train Loss: 1.2031
+Averaged Test Accuracy: 0.5719
+Averaged Test AUC: 0.9006
+Std Test Accuracy: 0.1662
+Std Test AUC: 0.0320
+------------------------- time cost ------------------------- 18.443035125732422
+
+-------------Round number: 32-------------
+
+Evaluate global model
+Averaged Train Loss: 1.1712
+Averaged Test Accuracy: 0.5887
+Averaged Test AUC: 0.9020
+Std Test Accuracy: 0.1582
+Std Test AUC: 0.0274
+------------------------- time cost ------------------------- 18.012917041778564
+
+-------------Round number: 33-------------
+
+Evaluate global model
+Averaged Train Loss: 1.1697
+Averaged Test Accuracy: 0.5871
+Averaged Test AUC: 0.9019
+Std Test Accuracy: 0.1731
+Std Test AUC: 0.0326
+------------------------- time cost ------------------------- 18.323997020721436
+
+-------------Round number: 34-------------
+
+Evaluate global model
+Averaged Train Loss: 1.1618
+Averaged Test Accuracy: 0.5967
+Averaged Test AUC: 0.9054
+Std Test Accuracy: 0.1489
+Std Test AUC: 0.0243
+------------------------- time cost ------------------------- 18.35796046257019
+
+-------------Round number: 35-------------
+
+Evaluate global model
+Averaged Train Loss: 1.1746
+Averaged Test Accuracy: 0.5806
+Averaged Test AUC: 0.8991
+Std Test Accuracy: 0.1646
+Std Test AUC: 0.0307
+------------------------- time cost ------------------------- 18.0592942237854
+
+-------------Round number: 36-------------
+
+Evaluate global model
+Averaged Train Loss: 1.1633
+Averaged Test Accuracy: 0.5970
+Averaged Test AUC: 0.9045
+Std Test Accuracy: 0.1502
+Std Test AUC: 0.0228
+------------------------- time cost ------------------------- 18.478132963180542
+
+-------------Round number: 37-------------
+
+Evaluate global model
+Averaged Train Loss: 1.1658
+Averaged Test Accuracy: 0.5985
+Averaged Test AUC: 0.9061
+Std Test Accuracy: 0.1448
+Std Test AUC: 0.0229
+------------------------- time cost ------------------------- 18.67110538482666
+
+-------------Round number: 38-------------
+
+Evaluate global model
+Averaged Train Loss: 1.1368
+Averaged Test Accuracy: 0.6036
+Averaged Test AUC: 0.9077
+Std Test Accuracy: 0.1553
+Std Test AUC: 0.0239
+------------------------- time cost ------------------------- 17.898133277893066
+
+-------------Round number: 39-------------
+
+Evaluate global model
+Averaged Train Loss: 1.1375
+Averaged Test Accuracy: 0.6084
+Averaged Test AUC: 0.9063
+Std Test Accuracy: 0.1359
+Std Test AUC: 0.0206
+------------------------- time cost ------------------------- 18.356457471847534
+
+-------------Round number: 40-------------
+
+Evaluate global model
+Averaged Train Loss: 1.1299
+Averaged Test Accuracy: 0.6054
+Averaged Test AUC: 0.9056
+Std Test Accuracy: 0.1508
+Std Test AUC: 0.0257
+------------------------- time cost ------------------------- 18.493829250335693
+
+-------------Round number: 41-------------
+
+Evaluate global model
+Averaged Train Loss: 1.1376
+Averaged Test Accuracy: 0.6088
+Averaged Test AUC: 0.9083
+Std Test Accuracy: 0.1344
+Std Test AUC: 0.0208
+------------------------- time cost ------------------------- 18.342772960662842
+
+-------------Round number: 42-------------
+
+Evaluate global model
+Averaged Train Loss: 1.1220
+Averaged Test Accuracy: 0.6169
+Averaged Test AUC: 0.9101
+Std Test Accuracy: 0.1271
+Std Test AUC: 0.0189
+------------------------- time cost ------------------------- 18.467172145843506
+
+-------------Round number: 43-------------
+
+Evaluate global model
+Averaged Train Loss: 1.1151
+Averaged Test Accuracy: 0.6266
+Averaged Test AUC: 0.9128
+Std Test Accuracy: 0.1268
+Std Test AUC: 0.0148
+------------------------- time cost ------------------------- 18.29834222793579
+
+-------------Round number: 44-------------
+
+Evaluate global model
+Averaged Train Loss: 1.0993
+Averaged Test Accuracy: 0.6285
+Averaged Test AUC: 0.9136
+Std Test Accuracy: 0.1343
+Std Test AUC: 0.0171
+------------------------- time cost ------------------------- 18.645330905914307
+
+-------------Round number: 45-------------
+
+Evaluate global model
+Averaged Train Loss: 1.1001
+Averaged Test Accuracy: 0.6387
+Averaged Test AUC: 0.9165
+Std Test Accuracy: 0.1226
+Std Test AUC: 0.0144
+------------------------- time cost ------------------------- 18.456921339035034
+
+-------------Round number: 46-------------
+
+Evaluate global model
+Averaged Train Loss: 1.1041
+Averaged Test Accuracy: 0.6264
+Averaged Test AUC: 0.9124
+Std Test Accuracy: 0.1355
+Std Test AUC: 0.0188
+------------------------- time cost ------------------------- 18.65094304084778
+
+-------------Round number: 47-------------
+
+Evaluate global model
+Averaged Train Loss: 1.0837
+Averaged Test Accuracy: 0.6409
+Averaged Test AUC: 0.9148
+Std Test Accuracy: 0.1195
+Std Test AUC: 0.0128
+------------------------- time cost ------------------------- 18.46893811225891
+
+-------------Round number: 48-------------
+
+Evaluate global model
+Averaged Train Loss: 1.0735
+Averaged Test Accuracy: 0.6509
+Averaged Test AUC: 0.9176
+Std Test Accuracy: 0.0979
+Std Test AUC: 0.0094
+------------------------- time cost ------------------------- 18.642121076583862
+
+-------------Round number: 49-------------
+
+Evaluate global model
+Averaged Train Loss: 1.0879
+Averaged Test Accuracy: 0.6343
+Averaged Test AUC: 0.9145
+Std Test Accuracy: 0.1209
+Std Test AUC: 0.0158
+------------------------- time cost ------------------------- 17.979013681411743
+
+-------------Round number: 50-------------
+
+Evaluate global model
+Averaged Train Loss: 1.0671
+Averaged Test Accuracy: 0.6511
+Averaged Test AUC: 0.9170
+Std Test Accuracy: 0.1066wandb: updating run metadata
+wandb: uploading history steps 49-50, summary, console lines 505-517
+wandb: uploading config.yaml; uploading output.log
+wandb: 
+wandb: Run history:
+wandb:      client_0/cosine █▇██▇▇▆▆▆▆▅▅▄▄▃▂▃▄▂▂▂▃▂▃▂▂▃▂▃▃▁▃▂▂▂▁▃▂▂▂
+wandb:  client_0/cosine_loo ██▇▇▆▅▄▅▄▄▄▃▃▃▂▂▂▂▂▂▂▂▂▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:    client_0/test_acc ▁▄▅▅▆▆▇▇▇▇▇▆▇▇▇▇▇▇▆█▇▇▇▇▇▇▇█▇▇▇██▇▇█▇███
+wandb:  client_0/train_loss █▆▅▄▃▃▃▃▃▃▃▃▃▃▂▂▂▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▁▂▁▁▁
+wandb: client_0/update_norm █▆▅▄▄▃▂▂▂▂▂▂▂▂▂▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:      client_1/cosine ▄█▇▆▅▄▄▄▄▃▃▃▃▃▃▂▃▃▂▂▂▂▃▃▃▃▂▃▃▂▁▃▂▃▂▃▂▂▂▂
+wandb:  client_1/cosine_loo ▆█▇▆▆▄▄▄▄▃▃▃▃▂▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▂▂▂▂▂▁▂▁▁
+wandb:    client_1/test_acc ▁▁▃▃▄▄▅▅▅▆▆▆▆▆▆▇▆▇▇▇▇▇▇▇▇▇▇▇▇▇▇█████████
+wandb:  client_1/train_loss █▇▇▆▆▅▄▄▄▃▃▄▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▁▂▁▁▁▁▂▁▁▁▁
+wandb: client_1/update_norm ▇█▅▄▄▃▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                  +20 ...
+wandb: 
+wandb: Run summary:
+wandb:      client_0/cosine 0.56627
+wandb:  client_0/cosine_loo -0.53831
+wandb:    client_0/test_acc 0.70752
+wandb:  client_0/train_loss 0.87945
+wandb: client_0/update_norm 0.2983
+wandb:      client_1/cosine 0.24438
+wandb:  client_1/cosine_loo -0.14306
+wandb:    client_1/test_acc 0.69552
+wandb:  client_1/train_loss 0.86977
+wandb: client_1/update_norm 0.28936
+wandb:                  +20 ...
+wandb: 
+wandb: 🚀 View run fedprox_mu0.01_seed0 at: https://wandb.ai/vaibhavsharma15-iiit-allahabad/fl-pathmnist-screening/runs/oqv9hxy3
+wandb: ⭐️ View project at: https://wandb.ai/vaibhavsharma15-iiit-allahabad/fl-pathmnist-screening
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20261114_131121-oqv9hxy3/logs
+
+Std Test AUC: 0.0096
+------------------------- time cost ------------------------- 17.732698917388916
+
+Best accuracy.
+0.6511176624248983
+
+Average time cost per round.
+18.513389568328858
+File path: ../results/PathMNIST_FedProx_fedprox_mu0.01_seed0_0.h5
+
+Average time cost: 955.81s.
+Length:  51
+std for best accuracy: 0.0
+mean for best accuracy: 0.6511176624248983
+All done!
+
+Storage on cuda:0
+-------------------------------------------------------------------------------
+Total Tensors: 12828486 	Used Memory: 37.83M
+The allocated memory on cuda:0: 55.33M
+Memory differs due to the matrix alignment or invisible gradient buffer tensors
+-------------------------------------------------------------------------------

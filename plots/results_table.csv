@@ -1,0 +1,5 @@
+run,final_global_acc (last 5 mean),best_global_acc,client_acc_std (last 5 mean),client_0_acc,client_1_acc,client_2_acc,client_3_acc,client_4_acc,client_4_norm / others,client_4_cos_loo,others_cos_loo
+fedavg_seed0,0.6421,0.6528,0.1164,0.7067,0.6796,0.7524,0.4497,0.5385,1.071,-0.373,-0.235
+fedprox_mu0.01_seed0,0.6407,0.6511,0.1161,0.7088,0.6809,0.745,0.4485,0.5358,1.074,-0.374,-0.234
+fedprox_mu0.1_seed0,0.6273,0.6407,0.1248,0.7163,0.6704,0.722,0.4348,0.4799,1.093,-0.381,-0.228
+fedavg_clean_seed0,0.6569,0.667,0.1016,0.6632,0.6891,0.7667,0.4735,0.7063,0.74,-0.134,-0.213
