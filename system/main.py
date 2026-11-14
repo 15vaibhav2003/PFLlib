@@ -8,6 +8,8 @@ import warnings
 import numpy as np
 import torchvision
 import logging
+import random
+import wandb  # CHANGE: experiment tracking
 
 from flcore.servers.serveravg import FedAvg
 from flcore.servers.serverpFedMe import pFedMe
@@ -89,7 +91,10 @@ def run(args):
                 args.model = Mclr_Logistic(60, num_classes=args.num_classes).to(args.device)
 
         elif model_str == "CNN": # non-convex
-            if "MNIST" in args.dataset:
+            if args.dataset == "PathMNIST":
+                # CHANGE: PathMNIST is 3x28x28, so in_features=3; 28x28 input gives 64*4*4 = 1024
+                args.model = FedAvgCNN(in_features=3, num_classes=args.num_classes, dim=1024).to(args.device)
+            elif "MNIST" in args.dataset:
                 args.model = FedAvgCNN(in_features=1, num_classes=args.num_classes, dim=1024).to(args.device)
             elif "Cifar10" in args.dataset:
                 args.model = FedAvgCNN(in_features=3, num_classes=args.num_classes, dim=1600).to(args.device)
@@ -368,7 +373,18 @@ def run(args):
         else:
             raise NotImplementedError
 
+        # CHANGE: start a W&B run (only if a project name was given with -wp)
+        if args.wandb_project:
+            cfg = {}
+            for k, v in vars(args).items():
+                if isinstance(v, (int, float, str, bool)):   # skip model objects
+                    cfg[k] = v
+            wandb.init(project=args.wandb_project, name=args.run_name, config=cfg)
+
         server.train()
+
+        if args.wandb_project:
+            wandb.finish()   # CHANGE: close the W&B run
 
         time_list.append(time.time()-start)
 
@@ -499,7 +515,24 @@ if __name__ == "__main__":
     parser.add_argument('-cmss', "--collaberative_model_select_strategy", type=int, default=1)
 
 
+    # CHANGE: new flags for this task
+    parser.add_argument('-seed', "--seed", type=int, default=0,
+                        help="Training seed (model init and batch order)")
+    parser.add_argument('-nid', "--noisy_id", type=int, default=-1,
+                        help="Id of the client with label noise (-1 = no noisy client)")
+    parser.add_argument('-nr', "--noise_rate", type=float, default=0.0,
+                        help="Fraction of the noisy client's training labels to flip")
+    parser.add_argument('-wp', "--wandb_project", type=str, default="",
+                        help="W&B project name (empty = no W&B logging)")
+    parser.add_argument('-rn', "--run_name", type=str, default="run",
+                        help="Run name for W&B and the CSV files")
+
     args = parser.parse_args()
+
+    # CHANGE: use the chosen seed instead of the fixed torch.manual_seed(0)
+    random.seed(args.seed)
+    np.random.seed(args.seed)
+    torch.manual_seed(args.seed)
 
     os.environ["CUDA_VISIBLE_DEVICES"] = args.device_id
 
